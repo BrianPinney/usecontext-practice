@@ -1,24 +1,19 @@
-import logo from './logo.svg';
+import { useState, createContext } from 'react';
+import Page from './component/Page';
 import './App.css';
 
+export const UserStatus = createContext(null)
+
+
 function App() {
+  const [signedIn, setSignedIn] = useState(false)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <UserStatus.Provider value={[signedIn, setSignedIn]}>
+      <h1>{signedIn ? "Click below to sign in" : "Click below to sign out" }</h1>
+      <Page />
+      </UserStatus.Provider>
+    </>
   );
 }
 
